@@ -18,6 +18,9 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Auth::routes();
 
 Route::get('/profile/{user}/edit', [\App\Http\Controllers\ProfileController::class, 'edit']);
+Route::put('/profile/{user}', [\App\Http\Controllers\ProfileController::class, 'update']);
+Route::get('/profile/{user}/show-supervisor', [\App\Http\Controllers\ProfileController::class, 'showSupervisor']);
+Route::get('/profile/{user}/show-employee', [\App\Http\Controllers\ProfileController::class, 'showEmployee']);
 
 //Route::get('/articles', [\App\Http\Controllers\ArticlesController::class, 'index']);
 //Route::post('/articles', [\App\Http\Controllers\ArticlesController::class, 'store']);

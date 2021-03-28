@@ -64,10 +64,40 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $newUser = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        
+        $employee = new \App\Models\Employee();
+        $employee->user_id = $newUser->id;
+        $employee->save();
+        
+        $supervisors = User::where(['role' => 'supervisor'])->get();
+        
+        $dataSupervisors = [];
+        
+        foreach ($supervisors as $supervisor){
+            $supervisorData = \App\Models\Supervisor::where(['user_id' => $supervisor->id])->first();
+            $dataSupervisors[] = [
+                'supervisor' => $supervisorData,
+                'count' => count($supervisorData->employees)
+            ];
+        }
+        
+        usort($dataSupervisors , function($supervisorA, $supervisorB){
+            return $supervisorA['count'] <=> $supervisorB['count'];
+        });
+
+        $firstSupervisor = array_shift($dataSupervisors);
+
+        $employee->supervisors()->attach([$firstSupervisor['supervisor']->id]);
+        
+        $secondSupervisor = array_shift($dataSupervisors);
+
+        $employee->supervisors()->attach([$secondSupervisor['supervisor']->id]);
+        
+        return $newUser;
     }
 }

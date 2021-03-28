@@ -17,12 +17,23 @@
 <body>
     <header>
         <p class="site-title">
-            <a href="">Project</a>
+            <a href="{{ url('/') }}">Project</a>
         </p>
         <nav>
             <ul>
                 @auth
                     <li><a href="{{ url('/') }}">Home</a></li>
+                    <li><a href="{{ url('profile/' . auth()->user()->id . '/edit') }}">Profile</a></li>
+
+                    
+                    @if (auth()->user()->role == 'employee')
+                        <li><a href="{{ url('profile/' . auth()->user()->id . '/show-supervisor') }}">Supervisors</a></li>
+                    @endif
+                        
+                    @if (auth()->user()->role == 'supervisor')
+                        <li><a href="{{ url('profile/' . auth()->user()->id . '/show-employee') }}">Employees</a></li>
+                    @endif
+                    
                     <li><a id="logout">Logout</a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
                         @csrf

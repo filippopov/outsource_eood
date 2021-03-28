@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/outsource_eood/resources/css/app.css</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Http/Middleware/PreventRequestsDuringMaintenance.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Models/Supervisor.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Http/Middleware/Authenticate.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/resources/views/auth/login.blade.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Http/Controllers/Auth/ForgotPasswordController.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/.env</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/storage/logs/laravel.log</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/resources/views/home.blade.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/resources/views/layouts/app.blade.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/database/migrations/2021_03_27_175330_create_supervisors_table.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/database/migrations/2019_08_19_000000_create_failed_jobs_table.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/routes/web.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/database/factories/UserFactory.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/resources/views/auth/verify.blade.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/resources/views/auth/register.blade.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Providers/RouteServiceProvider.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Http/Controllers/ProfileController.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/public/css/app.css</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Models/User.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Models/Employee.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/database/migrations/2014_10_12_100000_create_password_resets_table.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Http/Controllers/Auth/RegisterController.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Http/Controllers/HomeController.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/database/migrations/2021_03_27_175405_create_employees_table.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Http/Controllers/Auth/LoginController.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/resources/views/welcome.blade.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/app/Http/Controllers/Controller.php</file>
+            <file>file:/C:/xampp/htdocs/outsource_eood/database/migrations/2014_10_12_000000_create_users_table.php</file>
+        </group>
+    </open-files>
+</project-private>

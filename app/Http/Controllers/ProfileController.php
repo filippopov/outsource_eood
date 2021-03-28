@@ -7,6 +7,9 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
+    const SUPERVISOR = 'supervisor';
+    const EMPLOYEE = 'employee';
+    
     public function __construct()
     {
         $this->middleware('auth');
@@ -14,28 +17,81 @@ class ProfileController extends Controller
     
     public function edit(User $user)
     {
-        dd($user);
         return view('profile.edit', ['user' => $user]);
     }
     
-    public function update(Article $article)
+    public function update(User $user)
     {
-        // update resource
+        $validateAtributes = $this->validateAtributes($user);
         
-        $validateAtributes = $this->validateAtributes();
+        $user->update($validateAtributes);
         
-//        $article = Articles::find($articleId);
-//        
-//        $article->title = request('title');
-//        $article->excerpt = request('excerpt');
-//        $article->body = request('body');
-//        
-//        $article->save();
+        if (request()->has('profile_image')){
+            $user->update(['profile_image' => request()->profile_image->store('profile_image', 'public')]);
+        }
+
+        return redirect('/');
+    }
+    
+    public function showSupervisor(User $user)
+    {
+        $data = null;
         
-        $article->update($validateAtributes);
+        if ($user->role == self::EMPLOYEE){
+            $employee = \App\Models\Employee::where(['user_id' => $user->id])->first();
+            $supervisorsIds = [];
+            
+            foreach ($employee->supervisors as $supervisor){
+                $supervisorsIds[] = $supervisor->user_id;
+            }
+
+            $data = User::whereIn('id', $supervisorsIds)->get();
+        }
         
-//        return redirect(route('article.show', $article));
+        return view('profile.supervisor', ['data' => $data]);
+    }
+    
+    public function showEmployee(User $user)
+    {
+        $data = null;
         
-        return redirect($article->path());
+        if ($user->role == self::SUPERVISOR){
+            $supervisor = \App\Models\Supervisor::where(['user_id' => $user->id])->first();
+            $employeeIds = [];
+            
+            foreach ($supervisor->employees as $employee){
+                $employeeIds[] = $employee->user_id;
+            }
+            
+            $nameFilter = request('name');
+            $emailFilter = request('email');
+            
+            if ($nameFilter && $emailFilter){
+                $data = User::whereIn('id', $employeeIds)->where('name', 'LIKE', '%'.$nameFilter.'%')->where('email', 'LIKE', '%'.$emailFilter.'%')->get(); 
+            } elseif($emailFilter){
+                $data = User::whereIn('id', $employeeIds)->where('email', 'LIKE', '%'.$emailFilter.'%')->get();
+            } elseif ($nameFilter){
+                $data = User::whereIn('id', $employeeIds)->where('name', 'LIKE', '%'.$nameFilter.'%')->get();
+            } else {
+                $data = User::whereIn('id', $employeeIds)->get();
+            }
+        }
+        
+        return view('profile.employee', ['data' => $data]);
+    }
+
+    protected function validateAtributes($user)
+    {
+        return tap(request()->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id], 
+        ]), function(){
+            if (request()->hasFile('profile_image')){
+                request()->validate([
+                    'profile_image' => ['mimes:jpeg,jpg,png,gif', 'required', 'max:10000000']
+                ]);
+            }
+        });
     }
 }
